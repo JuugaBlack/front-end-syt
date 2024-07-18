@@ -1,16 +1,16 @@
 <template>
-  <div class="user"> 
+  <div class="user">
     <!-- 左侧导航区域 -->
     <div class="menu">
-        <div class="top">
-            <el-icon><HomeFilled /></el-icon>
-            <span>/ 会员中心</span>
-        </div>
-        <el-menu
-        :default-active="$route.path"
-        class="el-menu-vertical-demo"
-      >
-        <el-menu-item index="/user/certification" @click="goUser('/user/certification')" >
+      <div class="top">
+        <el-icon><HomeFilled /></el-icon>
+        <span>/ 会员中心</span>
+      </div>
+      <el-menu :default-active="$route.path" class="el-menu-vertical-demo">
+        <el-menu-item
+          index="/user/certification"
+          @click="goUser('/user/certification')"
+        >
           <el-icon><Avatar /></el-icon>
           <span>实名认证</span>
         </el-menu-item>
@@ -43,34 +43,34 @@
 import {
   Histogram,
   Avatar,
-  Operation ,
+  Operation,
   Comment,
   InfoFilled,
-  HomeFilled
-} from '@element-plus/icons-vue'
-import { useRouter,useRoute } from 'vue-router';
-let $router = useRouter()
-let $route = useRoute()
-const goUser = (path:string) =>{
-  $router.push({path:path})
-}
+  HomeFilled,
+} from "@element-plus/icons-vue";
+import { useRouter, useRoute } from "vue-router";
+let $router = useRouter();
+let $route = useRoute();
+const goUser = (path: string) => {
+  $router.push({ path: path });
+};
 </script>
 
 <style scoped lang="scss">
-.user{
+.user {
+  display: flex;
+  .top {
+    color: #7f7f7f;
+    margin-bottom: 10px;
+  }
+  .menu {
+    flex: 2;
     display: flex;
-    .top{
-      color: #7f7f7f;
-      margin-bottom: 10px
-    }
-    .menu{
-        flex: 2;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .content{
-        flex:8;
-    }
+    flex-direction: column;
+    align-items: center;
+  }
+  .content {
+    flex: 8;
+  }
 }
 </style>
