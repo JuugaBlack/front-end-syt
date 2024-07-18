@@ -5,7 +5,7 @@ import type {
   LoginData,
   UserLoginResponseData,
   WXLoginResponseData,
-  HospitalWordData,
+  HospitalWorkData,
   DoctorResponseData,
   UserResponseData,
   DoctorInfoData,
@@ -60,7 +60,7 @@ export const reqHospitalBooking = (
   hoscode: string,
   depcode: string
 ) =>
-  request.get<any, HospitalWordData>(
+  request.get<any, HospitalWorkData>(
     API.BOOKING_URL + `${page}/${limit}/${hoscode}/${depcode}`
   );
 
