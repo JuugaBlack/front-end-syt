@@ -15,8 +15,8 @@ const useDetaliStore = defineStore("Detail", {
   actions: {
     async getHospital(hoscode: string) {
       let result: HospitalDetail = await reqHospitalDetail(hoscode);
-      if (result.code == 200) {
-        this.hospitalInfo = result.data;
+      if (result.data.code == 200) {
+        this.hospitalInfo = result.data.data;
       }
     },
     //获取科室的数据

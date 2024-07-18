@@ -29,8 +29,8 @@ onMounted(() => {
 });
 const getRegion = async () => {
   let result: any = await reqHospitalLevelAndRegion("Beijin");
-  if (result.code == 200) {
-    regionArr.value = result.data;
+  if (result.data.code == 200) {
+    regionArr.value = result.data.data;
   }
 };
 //地区高亮的响应式数据

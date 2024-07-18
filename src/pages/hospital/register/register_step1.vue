@@ -136,12 +136,7 @@
 
 <script setup lang="ts">
 import { reqHospitalBooking, reqHospitalDoctor } from "@/api/hospital";
-import {
-  DocArr,
-  Doctor,
-  DoctorResponseData,
-  HospitalWorkData,
-} from "@/api/hospital/type";
+import { DocArr, Doctor } from "@/api/hospital/type";
 import { onMounted, ref, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 // import { HospitalWordData } from '@/api/hospital/type';
@@ -156,14 +151,14 @@ let workTime: any = ref({});
 let doctorArr = ref<DocArr>([]);
 //获取挂号数据
 const fetchWorkData = async () => {
-  let result: HospitalWorkData = await reqHospitalBooking(
+  let result: any = await reqHospitalBooking(
     pageNo.value,
     limit.value,
     $route.query.hoscode as string,
     $route.query.depcode as string
   );
-  if (result.code == 200) {
-    workData.value = result.data;
+  if (result.data.code == 200) {
+    workData.value = result.data.data;
     //存储第一天的数据
     workTime.value = workData.value.bookingScheduleList[0];
     //获取医生的数据
@@ -183,13 +178,9 @@ const getDoctorWorkData = async () => {
   let depcode: string = $route.query.depcode as string;
   //时间
   let workDate: string = workTime.value.workDate;
-  let result: DoctorResponseData = await reqHospitalDoctor(
-    hoscode,
-    depcode,
-    workDate
-  );
-  if (result.code == 200) {
-    doctorArr.value = result.data;
+  let result: any = await reqHospitalDoctor(hoscode, depcode, workDate);
+  if (result.data.code == 200) {
+    doctorArr.value = result.data.data;
   }
 };
 //点击某一天的回调

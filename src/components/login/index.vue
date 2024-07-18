@@ -204,10 +204,10 @@ const changeScene = async () => {
   new WxLogin({
     self_redirect: true, //true:手机点击确认登录后可以在 iframe 内跳转到 redirect_uri
     id: "login_container", //显示二维码容器设置
-    appid: result.data.appid, //应用位置标识appid
+    appid: result.data.data.appid, //应用位置标识appid
     scope: "snsapi_login", //当前微信扫码登录页面已经授权了
-    redirect_uri: result.data.redirectUri, //填写授权回调域路径,就是用户授权成功以后，微信服务器向公司后台推送code地址
-    state: result.data.state, //state就是学校服务器重定向的地址携带用户信息
+    redirect_uri: result.data.data.redirectUri, //填写授权回调域路径,就是用户授权成功以后，微信服务器向公司后台推送code地址
+    state: result.data.data.state, //state就是学校服务器重定向的地址携带用户信息
     style: "black",
     href: "",
   });
@@ -266,7 +266,7 @@ const login = async () => {
 };
 
 //自定义校验规则:手机号码自定义校验规则
-const validatorPhone = (value: any, callBack: any) => {
+const validatorPhone = (_rule: any, value: any, callBack: any) => {
   //rule:即为表单校验规则对象
   //value:即为当前文本的内容
   //callBack:回调函数
@@ -279,7 +279,7 @@ const validatorPhone = (value: any, callBack: any) => {
   }
 };
 //验证码自定义校验规则
-const validatorCode = (value: any, callBack: any) => {
+const validatorCode = (_rule: any, value: any, callBack: any) => {
   //rule:即为表单校验规则对象
   //value:即为当前文本的内容
   //callBack:回调函数
@@ -391,3 +391,4 @@ export default {
   }
 }
 </style>
+_rule_rule

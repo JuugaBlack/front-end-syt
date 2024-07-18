@@ -18,7 +18,6 @@ import { Search } from "@element-plus/icons-vue";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 import { reqHospitalInfo } from "@/api/home";
-import { HospitalInfo } from "@/api/home/type";
 
 //创建路由器对象
 let $router = useRouter();
@@ -27,9 +26,9 @@ let hosname = ref<string>("");
 
 //组件回调
 const querySearch = async (keyword: string, cb: any) => {
-  let result: HospitalInfo = await reqHospitalInfo(keyword);
+  let result: any = await reqHospitalInfo(keyword);
   //整理数据,成组件需要的数据
-  let showData = result.data.map(
+  let showData = result.data.data.map(
     (item: { hosname: string; hoscode: string }) => {
       return {
         value: item.hosname,

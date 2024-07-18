@@ -102,10 +102,10 @@ const getOrderInfo = async (pager: number = 1) => {
     patientId.value,
     orderStatus.value
   );
-  if (result.code == 200)
+  if (result.data.code == 200)
     [
-      (allOrderArr.value = result.data.records),
-      (total.value = result.data.total),
+      (allOrderArr.value = result.data.data.records),
+      (total.value = result.data.data.total),
     ];
 };
 //点击详情按钮的回调
@@ -129,11 +129,11 @@ const handler = (pageSizes: number) => {
 const getData = async () => {
   const result: any = await reqAllUser();
   const result1: any = await reqOrderState();
-  if (result.code == 200) {
-    allUser.value = result.data;
+  if (result.data.code == 200) {
+    allUser.value = result.data.data;
   }
-  if (result1.code == 200) {
-    allState.value = result1.data;
+  if (result1.data.code == 200) {
+    allState.value = result1.data.data;
   }
 };
 

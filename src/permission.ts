@@ -43,7 +43,7 @@ router.beforeEach((to, _from, next) => {
 });
 
 //后置守卫
-router.afterEach(() => {
+router.afterEach((_to, _from) => {
   //访问路由组件成功，进度条小时
   Nprogress.done();
 });

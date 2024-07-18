@@ -171,8 +171,8 @@ onMounted(() => {
 //获取预约订单详情
 const getOrderInfo = async () => {
   let result: any = await reqOrderInfo($route.query.orderId as string);
-  if (result.code == 200) {
-    orderInfo.value = result.data;
+  if (result.data.code == 200) {
+    orderInfo.value = result.data.data;
   }
 };
 //取消预约 orderStatus有三种：-1取消、0预约未支付、1支付成功
@@ -192,11 +192,11 @@ const openDialog = async () => {
   //发请求获取二维码
   let result: any = await reqQrcode($route.query.orderId as string);
   //根据服务器返回的二维码信息生成二维码图片
-  imgUrl.value = await QrCode.toDataURL(result.data.codeUrl);
+  imgUrl.value = await QrCode.toDataURL(result.data.data.codeUrl);
   //询问服务器交易支付结果,隔几秒
   timer.value = setInterval(async () => {
     let result: any = await reqQueryPayState($route.query.orderId as string);
-    if (result.data) {
+    if (result.data.data) {
       //关闭对话框
       dialogVisible.value = false;
       //提示信息

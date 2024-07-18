@@ -22,10 +22,7 @@
 
 <script setup lang="ts" name="Level">
 import { reqHospitalLevelAndRegion } from "@/api/home";
-import type {
-  HospitalLevelAndRegionArr,
-  HospitalLevelAndRegionResponseData,
-} from "@/api/home/type";
+import type { HospitalLevelAndRegionArr } from "@/api/home/type";
 import { onMounted, ref } from "vue";
 // import { HospitalLevelAndRegionResponseData } from '@/api/home/type';
 let levelArr = ref<HospitalLevelAndRegionArr>([]);
@@ -35,10 +32,9 @@ onMounted(() => {
   getLevel();
 });
 const getLevel = async () => {
-  let result: HospitalLevelAndRegionResponseData =
-    await reqHospitalLevelAndRegion("HosType");
-  if (result.code == 200) {
-    levelArr.value = result.data;
+  let result: any = await reqHospitalLevelAndRegion("HosType");
+  if (result.data.code == 200) {
+    levelArr.value = result.data.data;
   }
 };
 

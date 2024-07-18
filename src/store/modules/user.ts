@@ -16,8 +16,8 @@ const useUserStore = defineStore("User", {
     //获取验证码的方法
     async getCode(phone: string) {
       let result: any = await reqCode(phone);
-      if (result.code == 200) {
-        this.code = result.data;
+      if (result.data.code == 200) {
+        this.code = result.data.data;
         return "ok";
       } else {
         return Promise.reject(new Error(result.message));
@@ -27,8 +27,8 @@ const useUserStore = defineStore("User", {
     //用户手机号码登录的方法
     async userLogin(loginParam: LoginData) {
       let result: any = await reqUserLogin(loginParam);
-      if (result.code == 200) {
-        this.userInfo = result.data;
+      if (result.data.code == 200) {
+        this.userInfo = result.data.data;
         //本地存储用户信息
         SET_TOKEN(JSON.stringify(this.userInfo));
         //返回成功的Promise

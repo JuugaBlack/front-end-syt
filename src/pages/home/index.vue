@@ -50,7 +50,7 @@ import Level from "@/pages/home/level/index.vue";
 import Region from "@/pages/home/region/index.vue";
 import Card from "@/pages/home/card/index.vue";
 import Tip from "@/pages/home/tip/index.vue";
-import type { Content, HospitalResponseData } from "@/api/home/type";
+import type { Content } from "@/api/home/type";
 //分页器需要的数据
 //分页器当前页码
 let pageNo = ref<number>(1);
@@ -65,15 +65,15 @@ let hostype = ref<string>("");
 let districtCode = ref<string>("");
 const getHospitalInfo = async () => {
   //获取医院数据，默认获取第一页，一页10个医院的数据
-  let result: HospitalResponseData = await reqHospital(
+  let result: any = await reqHospital(
     pageNo.value,
     pageSize.value,
     hostype.value,
     districtCode.value
   );
-  if (result.code == 200) {
-    hasHospitalArr.value = result.data.content;
-    total.value = result.data.totalElements;
+  if (result.data.code == 200) {
+    hasHospitalArr = result.data.data.content;
+    total.value = result.data.data.totalElements;
   }
 };
 //组件挂在完毕，发一次请求

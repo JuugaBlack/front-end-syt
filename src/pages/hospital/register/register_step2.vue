@@ -97,8 +97,6 @@ import { UserArr } from "@/api/hospital/type";
 import { useRoute, useRouter } from "vue-router";
 import { reqSubmitOrder } from "@/api/user";
 import { ElMessage } from "element-plus";
-import { SubmitOrder } from "@/api/user/type";
-
 let userArr = ref<UserArr>([]);
 let $route = useRoute();
 let docInfo = ref<any>({});
@@ -113,15 +111,15 @@ onMounted(() => {
 //获取就诊人信息
 const fetchUserData = async () => {
   let result: any = await reqGetUser();
-  if (result.code == 200) {
-    userArr.value = result.data;
+  if (result.data.code == 200) {
+    userArr.value = result.data.data;
   }
 };
 //获取医生信息
 const fetchDoctorData = async () => {
   let result: any = await reqGetDoctor($route.query.docId as string);
-  if (result.code == 200) {
-    docInfo.value = result.data;
+  if (result.data.code == 200) {
+    docInfo.value = result.data.data;
   }
 };
 
@@ -136,17 +134,13 @@ const sumbitOrder = async () => {
   let hoscode = docInfo.value.hoscode;
   let scheduleId = docInfo.value.id;
   let patientId = userArr.value[currentIndex.value].id;
-  let result: SubmitOrder = await reqSubmitOrder(
-    hoscode,
-    scheduleId,
-    patientId
-  );
-  if (result.code == 200) {
-    $router.push({ path: "/user/order", query: { orderId: result.data } });
+  let result: any = await reqSubmitOrder(hoscode, scheduleId, patientId);
+  if (result.data.code == 200) {
+    $router.push({ path: "/user/order", query: { orderId: result.data.data } });
   } else {
     ElMessage({
       type: "error",
-      message: result.message,
+      message: result.data.message,
     });
   }
 };

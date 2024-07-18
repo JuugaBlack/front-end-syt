@@ -101,12 +101,7 @@ import {
   reqUserCertification,
   reqUserInfo,
 } from "@/api/user";
-import {
-  CertationArr,
-  CertationTypeResponseData,
-  UserInfoResponseData,
-  UserParams,
-} from "@/api/user/type";
+import { CertationArr, UserParams } from "@/api/user/type";
 import { InfoFilled } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
 import { onMounted, ref, reactive } from "vue";
@@ -130,17 +125,17 @@ onMounted(() => {
 });
 //获取用户信息的方法
 const getUserInfo = async () => {
-  let result: UserInfoResponseData = await reqUserInfo();
-  if (result.code == 200) {
-    userInfo.value = result.data;
+  let result: any = await reqUserInfo();
+  if (result.data.code == 200) {
+    userInfo.value = result.data.data;
     console.log(userInfo.value);
   }
 };
 //获取证件类型的方法
 const getType = async () => {
-  let result: CertationTypeResponseData = await reqCertificationType();
-  if (result.code == 200) {
-    arrType.value = result.data;
+  let result: any = await reqCertificationType();
+  if (result.data.code == 200) {
+    arrType.value = result.data.data;
   }
 };
 

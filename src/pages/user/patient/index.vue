@@ -148,8 +148,8 @@ onMounted(() => {
 })
 const getAllUser = async () => {
   let result: any = await reqGetUser()
-  if (result.code == 200) {
-    userArr.value = result.data
+  if (result.data.code == 200) {
+    userArr.value = result.data.data
   }
 }
 //添加就诊人按钮回调
@@ -190,8 +190,8 @@ const reset = () => {
 const getCertificationType = async() => {
   let result:any =  await reqCertificationType()
   console.log(result)
-  if(result.code == 200){
-    certationArr.value = result.data
+  if(result.data.code == 200){
+    certationArr.value = result.data.data
   }
 }
 
@@ -201,7 +201,7 @@ const props:CascaderProps = {
   async lazyLoad(node, resolve) {
     let result:any = await reqCity(node.data?.id as string || '86')
     //整理数据
-    let showData = result.data.map((item:any) => ({
+    let showData = result.data.data.map((item:any) => ({
         id:item.id,
         label:item.name,
         value:item.value,
